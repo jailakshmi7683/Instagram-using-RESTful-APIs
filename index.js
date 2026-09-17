@@ -34,8 +34,20 @@ let posts=[
 app.get("/posts",(req,res)=>{
     //res.send("Welcome to QUORA");
     res.render("home.ejs",{posts});
-})
+});
+
+app.get("/posts/new",( req,res)=>{
+    res.render("new.ejs");
+});
+
+app.post("/posts",( req,res)=>{
+    //console.log(req.body);
+    let {username, content}=req.body;
+    posts.push({ username, content });
+    //res.send("POST request working");
+    res.redirect("/posts");
+});
 
 app.listen(port,()=>{
     console.log(`Server started at ${port}`);
-})
+});
